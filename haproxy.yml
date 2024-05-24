@@ -11,7 +11,7 @@
     - name: Deploy HAProxy configuration
       template:
     src: 
-    dst: "{{ haproxy_cfg }}"
+    dest: "{{ haproxy_cfg }}"
 
     - name: Start and enable HAProxy
       service:
