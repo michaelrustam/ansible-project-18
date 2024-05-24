@@ -5,9 +5,16 @@ In this lab assignment, you will configure a CentOS 7 environment for deploying 
 
 ## Assignment Overview
 
-1. **Set Up Inventory and Configuration**:
+1. **Organize Ansible Playbooks into Ansible Role**:
+    - Create your own git repository for this project (optionally, fork this repository, but I would prefer the former)
+    - Turn content of this repository into Ansible role which automates the entire configuration and deployment process.
+    - Use variables, templates, handlers, and modules in your role. The role must be run be a single command.
+
+1. **Set Up Inventory and Role directory Structure**:
     - Define the inventory of your servers.
+    - Setup the main playbook which will run all roles.
     - Set up configuration variables for your web servers, HAProxy, and MySQL database.
+    - Set up the role directory structure
 
 2. **System Configuration**:
     - Set up users, permissions, and ulimits.
@@ -16,6 +23,7 @@ In this lab assignment, you will configure a CentOS 7 environment for deploying 
 3. **Web Server Deployment**:
     - Install and configure a web server (Apache) on multiple nodes.
     - Install Git and clone a repository into the web application directory.
+    - IMPORTANT!!! Git repository containing the webapp iss hardcoded. It absolutely needs to be turned into a variable and declared in the variables section.
 
 4. **MySQL Database Deployment**:
     - Install and configure MySQL on a dedicated database server.
@@ -25,26 +33,24 @@ In this lab assignment, you will configure a CentOS 7 environment for deploying 
     - Install and configure HAProxy on a dedicated load balancer node.
     - Set up HAProxy to distribute traffic to the web servers.
 
-6. **Ansible Playbook**:
-    - Create Ansible role to automate the entire configuration and deployment process.
-    - Use variables, templates, handlers, and modules in your playbook.
 
 ## Conditions of Satisfaction
 
 ### Deliverables
 
-1. **Ansible Roles**:
+1. **Ansible Roles - IMPORTANT!!!**:
     - All playbooks must be refactored into sharable roles.
+    - When we review, I must to be able to clone your repository and immediatelly run the role after changing the inventory
 
 2. **Web Servers**:
     - Web servers should have the web application installed from the Git repository.
     - The Git repository URL must be moved to the variables section and assigned to a variable instead of being hardcoded.
 
 3. **Corrections**:
-    - Correct any mistakes in the playbooks.
+    - Correct any mistakes in the playbooks, both structural and syntax.
 
 4. **HAProxy Load Balancing** (Optional):
-    - Implement HAProxy load balancing as an additional feature, if desired.
+    - Implement HAProxy load balancing as an additional feature (optional)
 
 ### Grading Criteria
 
@@ -58,9 +64,6 @@ In this lab assignment, you will configure a CentOS 7 environment for deploying 
 
 - **Accuracy and Security**:
     - Ensure the accuracy and security of system configurations, including users, permissions, ulimits, and DNS records.
-
-- **Documentation**:
-    - The README file should clearly document the configuration and deployment process and include any assumptions made.
 
 - **Functionality**:
     - The deployed web application should function correctly, and the optional HAProxy load balancing should distribute traffic to the web servers effectively.
