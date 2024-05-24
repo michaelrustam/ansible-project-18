@@ -1,7 +1,6 @@
 ---
 - name: System Configuration
   hosts: all
-  become: yes
 
   tasks:
     - name: Create system users
@@ -15,7 +14,6 @@
       notify: reload limits
 
     - name: Configure DNS records
-      lineinfile:
         path: /etc/hosts
         line: "{{ item.address }} {{ item.name }}"
         state: present
