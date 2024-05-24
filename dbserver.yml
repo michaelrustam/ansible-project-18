@@ -13,9 +13,9 @@
       enabled: yes
 
     - name: Create database
-      mysql_db:
-      name: "{{ db_name }}"
-      state: present
+        mysql_db:
+        name: "{{ db_name }}"
+        state: present
 
     - name: Create database user
       mysql_user:
