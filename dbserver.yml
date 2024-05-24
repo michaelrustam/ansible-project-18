@@ -1,0 +1,27 @@
+---
+- name: Deploy Database Server
+  hosts: dbservers
+  become: yes
+
+  tasks:
+    - name: Install MySQL
+      yum:
+        name: mariadb-server
+        state: present
+
+    - name: Start and enable MySQL
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+    - name: Create database
+      mysql_db:
+        name: "{{ db_name }}"
+        state: present
+
+    - name: Create database user
+      mysql_user:
+        password: "{{ db_password }}"
+        priv: "{{ db_name }}.*:ALL"
+        state: present
