@@ -4,21 +4,31 @@
   become: yes
 
   tasks:
-    - name: Install Nginx
-      yum:
-        name: nginx
-        state: present
+    - name: Install Apache
 
-    - name: Start and enable Nginx
+    - name: Start and enable Apache
       service:
-        name: nginx
+        name: httpd
         state: started
         enabled: yes
 
-    - name: Deploy web application
-      copy:
-        src: /path/to/your/webapp
+    - name: Install Git
+      yum:
+        name: git
+        state: present
+
+    - name: Clone the repository
+      git:
+        repo: 'https://github.com/kubowania/space-invaders.git'
         dest: "{{ web_app_dir }}"
-        owner: nginx
-        group: nginx
+        version: master
+        force: yes
+        update: yes
+
+    - name: Set permissions for web application directory
+      file:
+        path: "{{ web_app_dir }}"
+        owner: apache
+        group: apache
         mode: '0755'
+        recurse: yes
