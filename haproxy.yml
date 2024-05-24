@@ -1,0 +1,27 @@
+---
+- name: Deploy Load Balancer
+  hosts: lbservers
+  become: yes
+
+  tasks:
+    - name: Install HAProxy
+      yum:
+        name: haproxy
+        state: present
+
+    - name: Deploy HAProxy configuration
+      template:
+        src: 
+        dest: "{{ haproxy_cfg }}"
+
+    - name: Start and enable HAProxy
+      service:
+        name: haproxy
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: Restart HAProxy
+      service:
+        name: haproxy
+        state: restarted
