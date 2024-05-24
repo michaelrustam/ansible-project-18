@@ -18,7 +18,7 @@
         state: present
 
     - name: Clone the repository
-      git:
+      giit:
         repo: 'https://github.com/kubowania/space-invaders.git'
         dest: "{{ web_app_dir }}"
         version: master
