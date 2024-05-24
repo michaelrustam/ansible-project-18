@@ -5,6 +5,8 @@ In this lab assignment, you will configure a CentOS 7 environment for deploying 
 
 ## Assignment Overview
 
+You have almost a week of time to complete this assignment. Please use your time wisely.
+
 1. **Organize Ansible Playbooks into Ansible Role**:
     - Create your own git repository for this project (optionally, fork this repository, but I would prefer the former)
     - Turn content of this repository into Ansible role which automates the entire configuration and deployment process.
@@ -67,3 +69,5 @@ In this lab assignment, you will configure a CentOS 7 environment for deploying 
 
 - **Functionality**:
     - The deployed web application should function correctly, and the optional HAProxy load balancing should distribute traffic to the web servers effectively.
+
+Have a great weekend!
