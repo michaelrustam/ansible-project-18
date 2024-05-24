@@ -1,7 +1,7 @@
 ---
 - name: Deploy Database Server
   hosts: dbservers
-
+   become: yes
 
   tasks:
     - name: Install MySQL
