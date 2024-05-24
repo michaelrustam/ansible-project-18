@@ -1,1 +1,26 @@
 ---
+
+- name: System Configuration
+    hosts: all
+
+  tasks:
+    - name: Create system users
+    
+    -  name: Set file limits
+        lineinfile:
+        path: /etc/security/limits.conf
+        line: "{{ item.domain }} {{ item.type }} {{ item.item }} {{ item.value }}"
+        state: present
+        with_items: "{{ ulimits }}"
+      notify: reload limits
+
+    - name: Configure DNS records
+        path: /etc/hosts
+        line: "{{ item.address }} {{ item.name }}"
+        state: present
+        with_items: "{{ dns_records }}"
+
+  handlers:
+    - name: reload limits
+      command: sysctl -p
+
