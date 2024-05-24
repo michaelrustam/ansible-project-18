@@ -1,0 +1,35 @@
+---
+web_servers:
+  - 192.168.1.101
+  - 192.168.1.102
+
+db_server: 192.168.1.103
+db_name: webapp_db
+db_user: webapp_user
+db_password: secure_password
+
+haproxy_cfg: /etc/haproxy/haproxy.cfg
+web_app_dir: /var/www/html/webapp
+
+system_users:
+  - name: webadmin
+    uid: 1001
+    gid: 1001
+    shell: /bin/bash
+    password: "{{ 'password' | password_hash('sha512') }}"
+
+dns_records:
+  - name: webapp.example.com
+    address: 192.168.1.101
+  - name: webapp.example.com
+    address: 192.168.1.102
+
+ulimits:
+  - domain: "*"
+    type: "hard"
+    item: "nofile"
+    value: 65536
+  - domain: "*"
+    type: "soft"
+    item: "nofile"
+    value: 65536
