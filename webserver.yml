@@ -1,0 +1,24 @@
+---
+- name: Deploy Web Servers
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start and enable Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy web application
+      copy:
+        src: /path/to/your/webapp
+        dest: "{{ web_app_dir }}"
+        owner: nginx
+        group: nginx
+        mode: '0755'
