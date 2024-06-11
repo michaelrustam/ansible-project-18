@@ -1,7 +1,7 @@
 ---
 web_servers:
-  - 192.168.1.101
-  - 192.168.1.102
+  - 192.168.165.218
+  - 192.168.165.218
 
 db_server: 192.168.1.103
 db_name: webapp_db
@@ -20,9 +20,9 @@ system_users:
 
 dns_records:
   - name: webapp.example.com
-    address: 192.168.1.101
+    address: 192.168.165.218
   - name: webapp.example.com
-    address: 192.168.1.102
+    address: 192.168.165.218
 
 ulimits:
   - domain: "*"

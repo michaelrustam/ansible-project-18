@@ -1,0 +1,39 @@
+---
+- name: 
+  yum: 
+    name: httpd
+    state: present
+    notify: Start and enable Apache
+
+- name: Install Git
+  yum: 
+    name: git
+    state: present
+
+- name: Clone the repository
+  git:
+    repo: "{{ git_repo }}"
+    dest: "{{ web_app_dir }}"
+    version: master
+    force: yes
+    update: yes
+    
+- name: Set permissions for web application directory
+  file:
+    path: "{{ web_app_dir }}"
+    owner: apache
+    group: apache
+    mode: '0755'
+    recurse: yes
+
+- name: Configure firewall to allow HTTP traffic
+  shell:
+    cmd: firewall-cmd --permanent --add-port=80/tcp
+  args:
+    warn: false
+
+- name: Reload firewall
+  shell: 
+    cmd: firewall-cmd --reload
+  args: 
+    warn: false

@@ -1,0 +1,24 @@
+---
+- name: Install HAProxy
+  yum:
+    name: haproxy
+    state: present
+  notify: Start and enable HAProxy
+
+- name: Start and enable HAProxy
+  service:
+    name: haproxy
+    state: started
+    enabled: yes
+
+- name: Deploy HAProxy configuration
+  template:
+    src: haproxy.cfg.j2
+    dest: "{[ haproxy_cfg ]}"
+  notify: Restart HAProxy
+
+- name: Configure firewall to allow HTTP traffic
+  shell:
+    cmd: firewall-cmd --reload
+  args: 
+    warn: false 

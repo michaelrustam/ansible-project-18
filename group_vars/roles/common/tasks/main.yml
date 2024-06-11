@@ -1,0 +1,26 @@
+---
+- name: Create system users
+  users: 
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    shell: "{{ item.shell }}"
+    uid: "{{ item.uid }}"
+
+    create_home: yes
+    state: present
+  with_items: "{{ system_users }}"
+
+- name: Set file limits
+  lineinfile: 
+    path: /etc/security/limits.conf
+    line: "{{ item.domain }} {{ item.type }} {{ item.item }} {{ item.value  }}" 
+    state: present
+  with_items: "{{ ulimits }}"
+  notify: reload limits
+
+- name: Configure DNS records
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ item.address }} {{ item.name }}"
+    state: present
+  with_items: "{{ dns_records }}"

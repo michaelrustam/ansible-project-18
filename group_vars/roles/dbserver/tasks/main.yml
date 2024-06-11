@@ -1,0 +1,34 @@
+---
+- name: Install MySQL
+  yum:
+    name:
+      - mariadb
+      - mariadb-server
+    state: present
+  notify: Start and enable-MySQL
+
+- name: Install MySQL-python
+  yum:
+    name:
+      - python3-pip
+      - MySQL-python
+    state: present
+
+- name: Start and enable MySQL
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Create database
+  mysql_db:
+    name: "{{ db_name }}"
+    state: present
+
+- name: Create datebase user
+  mysql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    priv: "{{ db_name }}.*:ALL"
+    state: present
+    

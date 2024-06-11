@@ -1,0 +1,36 @@
+---
+  - name: apply common configuration to all hosts
+    hosts: all 
+    remote-user: ansible
+    become: yes
+
+    roles:
+      - common
+
+  - name: Install Apache and GIT, clone the space invaders repo, and set permissions for webservers
+    hots: webservers
+    remote_user: ansible
+    become: yes
+    
+    roles: 
+      - webserver
+
+  # - name: Install MySQL , create a database , and create a database user to the database server
+  #   hosts: dbservers
+  #   remote_user: ansible
+  #   become: yes 
+
+  #   roles: 
+  #     - dbserver
+  
+  - name: Install, configure and start haproxy load balancer
+    hosts: lbservers
+    remote_user: ansible
+    become: yes
+
+    roles: 
+      - lbserver
+
+- import_playbook: system_config.yml
+- import_playbook: webserver.yml
+- import_playbook: haproxy.yml
